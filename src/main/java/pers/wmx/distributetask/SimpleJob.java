@@ -1,4 +1,6 @@
-package pers.wmx.distributetask.job;
+package pers.wmx.distributetask;
+
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -12,9 +14,10 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 public class SimpleJob extends QuartzJobBean {
+    private final AtomicInteger counter = new AtomicInteger();
 
     @Override
     protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
-        
+        log.info("running counter:{}", counter.incrementAndGet());
     }
 }
