@@ -1,7 +1,6 @@
 package pers.wmx.distributetask;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
+import org.quartz.DisallowConcurrentExecution;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.scheduling.quartz.QuartzJobBean;
@@ -13,11 +12,10 @@ import lombok.extern.slf4j.Slf4j;
  * Created on 2021-12-21
  */
 @Slf4j
-public class SimpleJob extends QuartzJobBean {
-    private final AtomicInteger counter = new AtomicInteger(); // 并不会 ++ ，每次调度时都是新创建一个Job
-
+@DisallowConcurrentExecution  // 保证相同 JobDetail 在多个 JVM 进程中，有且仅有一个节点在执行
+public class DistributeJob1 extends QuartzJobBean {
     @Override
     protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
-        log.info("running counter:{}", counter.incrementAndGet());
+        log.info("running:{}", System.currentTimeMillis());
     }
 }

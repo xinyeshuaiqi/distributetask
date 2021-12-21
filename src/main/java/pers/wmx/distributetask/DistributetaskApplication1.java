@@ -3,11 +3,13 @@ package pers.wmx.distributetask;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication()
-public class DistributetaskApplication {
+// 再整个入口
+@SpringBootApplication
+public class DistributetaskApplication1 {
 
     public static void main(String[] args) {
-        SpringApplication.run(DistributetaskApplication.class, args);
+        System.setProperty("server.port", "99");
+        SpringApplication.run(DistributetaskApplication1.class, args);
     }
 
 }
