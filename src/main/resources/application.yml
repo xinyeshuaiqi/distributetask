@@ -1,15 +1,21 @@
 spring:
   datasource:
-    url: jdbc:mysql://39.97.47.254:3306/distributetask?useUnicode=true&characterEncoding=utf8&useAffectedRows=true
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
-    password: wmx123
+    user:
+      url: jdbc:mysql://39.97.47.254:3306/mydb?useUnicode=true&characterEncoding=utf8&useAffectedRows=true
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: root
+      password: wmx123
+    quartz:
+      url: jdbc:mysql://39.97.47.254:3306/distributetask?useUnicode=true&characterEncoding=utf8&useAffectedRows=true
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: root
+      password: wmx123
 
   # Quartz 的配置，对应 QuartzProperties 配置类
   quartz:
     scheduler-name: clusteredScheduler # Scheduler 名字。默认为 schedulerName
     job-store-type: jdbc # Job 存储器类型。默认为 memory 表示内存，可选 jdbc 使用数据库。
-    auto-startup: true # Quartz 是否自动启动
+    auto-startup: true # Qusartz 是否自动启动
     startup-delay: 0 # 延迟 N 秒启动
     wait-for-jobs-to-complete-on-shutdown: true # 应用关闭时，是否等待定时任务执行完成。默认为 false ，建议设置为 true
     overwrite-existing-jobs: false # 是否覆盖已有 Job 的配置
@@ -22,7 +28,7 @@ spring:
           # JobStore 相关配置
           jobStore:
             # 数据源名称
-            dataSource: myDataSource # 使用的数据源
+            dataSource: quartzDataSource
             class: org.quartz.impl.jdbcjobstore.JobStoreTX # JobStore 实现类
             driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
             tablePrefix: QRTZ_ # Quartz 表前缀

@@ -8,14 +8,13 @@ import org.quartz.TriggerBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import pers.wmx.distributetask.SimpleJob;
-
 /**
  * @author wangmingxin03
  * Created on 2021-12-21
  */
 @Configuration
 public class JobConfig {
+
     @Bean
     public JobDetail simpleJob() {
         return JobBuilder.newJob(SimpleJob.class)
